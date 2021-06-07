@@ -1,0 +1,16 @@
+   org 0000h 
+       mov r0,#30h         ;r0 pointing to 030h(int. RAM) 
+       mov r1,#40h         ;r1 pointing to 040h(int. RAM) 
+       mov r2,#0ah         ;r2 loaded with no. of elements to be exchanged  
+start:    mov a,@r0        ;data @r0 is stored in temporary reg r3  
+       mov r3,a 
+       mov a,@r1        ;data @r1 is moved to @r0 
+       mov @r0,a 
+       mov a,r3         ;data from r3 is moved to @r1 
+       mov @r1,a 
+       inc r0                ;increment data pointers 
+       inc r1 
+       djnz r2,start         ;decrement counter r2,repeat the process if r2 is not zero  
+	   nop 
+here:           sjmp here 
+       end
